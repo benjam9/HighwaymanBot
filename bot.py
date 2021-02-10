@@ -1,7 +1,6 @@
 import os
 import random
 import lyricProg
-import schedule
 import time
 import discord
 from discord.ext import commands
