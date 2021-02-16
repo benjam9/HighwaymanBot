@@ -68,7 +68,7 @@ async def test(ctx, song=None):
     await ctx.send(response)
 async def daily():
     await bot.wait_until_ready()
-    channel = bot.get_channel(808789910621519883) # replace with channel ID that you want to send to
+    channel = bot.get_channel(811297609577922590) # replace with channel ID that you want to send to
     msg_sent = False
 
     while True:
