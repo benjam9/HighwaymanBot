@@ -14,7 +14,7 @@ TOKEN = os.getenv('DISCORD_TOKEN')
 bot = commands.Bot(command_prefix='$')
 time = datetime.now
 highwaymenArr = ["Highwayman", "Sailor", "Dam Builder", "Starship Pilot", "Shotgun Rider", "River Gambler", "Mid-West Farmer", "American Indian"]
-
+countArr = [0,0,0,0,0,0,0,0]
 
 target_channel_id = 811297609577922590
 line = random.choice(lyricProg.lyrics)
@@ -38,17 +38,30 @@ async def highwaymen(ctx):
 @bot.command(name='add', help="Adds a highwayman to the list of highwaymen.")
 async def add(ctx, *args):
     global highwaymen
-    person = ' '.join(args)
-    highwaymenArr.append(person)
-    response = "**" + person + "** has been added to the highwaymen"
+    global countArr
+    if args:
+        person = ' '.join(args)
+        highwaymenArr.append(person)
+        countArr.append(0)
+        response = "**" + person + "** has been added to the highwaymen"
+    else:
+        response = "Please input a person to add"
+
     await ctx.send(response)
 
 @bot.command(name='remove', help="Removes a highwayman from the list of highwaymen.")
-async def remove(ctx, person):
+async def remove(ctx, *args):
     global highwaymenArr
-    person = ' '.join(args)
-    highwaymenArr.remove(person)
-    response = "**" + person + "** has been removed from the highwaymen"
+    global countArr
+    if args:
+        person = ' '.join(args)
+        countArr.pop(highwaymenArr.index(person))
+        highwaymenArr.remove(person)
+
+        response = "**" + person + "** has been removed from the highwaymen"
+    else:
+        response = "Please input a person to remove"
+
     await ctx.send(response)
 
 @bot.command(name='highwayman', help="Displays the highwayman of the day.")
@@ -68,31 +81,22 @@ async def lyrics(ctx, song=None):
 
     await ctx.send(response)
 
+@bot.command(name='hotd', help= "Displays how many times each highwayman was highwayman of the day.")
+async def hotd(ctx, *args):
+    global highwaymenArr
+    global countArr
+    hwm = ' '.join(args)
+    if args:
+        if hwm in highwaymenArr:
+            response = "**" + hwm + "** has been Highwayman of the Day **" + str(countArr[highwaymenArr.index(hwm)]) + "** times"
+        else:
+            response = "**" + hwm + "** is not a highwayman. Please input a highwayman"
+    else:
 
-
-# @tasks.loop(hours=24)
-# async def daily():
-#     await bot.wait_until_ready()
-#     channel = bot.get_channel(808789910621519883) # replace with channel ID that you want to send to
-#     msg_sent = False
-#
-#     threading.Timer(1, daily).start()
-#     while True:
-#         if time().hour == 15 and time().minute == 13:
-#             if not msg_sent:
-#                 global line
-#                 global hMan
-#                 global highwaymenArr
-#                 line = random.choice(lyricProg.lyrics)
-#                 hMan = random.choice(highwaymenArr)
-#                 print("Highwayman changed to " + hMan)
-#                 print("Quote changed to " + line)
-#                 await channel.send("@everyone Today's highwayman of the day is: **" + hMan + "**, and the line of the day is **" + line + "**.")
-#                 msg_sent = True
-#         else:
-#             msg_sent = False
-#
-#     await asyncio.sleep(1)
+        response = "__HOTD:__\n"
+        for hwm in highwaymenArr:
+            response += "**" + hwm + "**: " + str(countArr[highwaymenArr.index(hwm)]) +"\n"
+    await ctx.send(response)
 
 @tasks.loop(hours=24)
 async def called_once_a_day():
@@ -104,6 +108,8 @@ async def called_once_a_day():
     hMan = random.choice(highwaymenArr)
     print("Highwayman changed to " + hMan)
     print("Quote changed to " + line)
+    countArr[highwaymenArr.index(hMan)] += 1;
+    print(countArr)
     await message_channel.send("@everyone: Today's highwayman of the day is: **" + hMan + "**, and the line of the day is: **" + line + "**")
 @called_once_a_day.before_loop
 async def before():
