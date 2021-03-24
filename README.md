@@ -21,7 +21,7 @@ The bot will @everyone with the updated highwayman and line daily
 
 To run the bot follow these instructions:
 1. Follow the process of making a bot with the discord API [here.](https://discordpy.readthedocs.io/en/latest/discord.html)
-2. Clone this repo and create a .env file in the repository and add ```TOKEN = '[DISCORD BOT TOKEN]'```
+2. Clone this repo and create a .env file in the repository and add ```DISCORD_TOKEN = '[DISCORD BOT TOKEN]'```
 3. Run ```python bot.py```
 
 
