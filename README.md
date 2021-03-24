@@ -33,3 +33,5 @@ To run the bot follow these instructions:
 - [ ] Add the ability to unlock a random card for 10,000 points, a card from a certain song for 15,000 points, or a specific card for 20,000
 - [ ] Add a system where users can spend points and the bot will them a highwaymen when they send a message, e.g, ```^ This guy's a sailor!```
 - [ ] Add a quiz game for the lyrics with the difficulties: Bandit - Multiple Choice. Soldier - Fill in the blank. Highwayman - Find an incorrect line in a certain amount of time. 
+- [ ] Add Highwayman/American Remains calendar display.
+- [ ] Add a command that allows users to see their Highwayman zodiac by inputting a date.
