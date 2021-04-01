@@ -97,7 +97,28 @@ async def hotd(ctx, *args):
         for hwm in highwaymenArr:
             response += "**" + hwm + "**: " + str(countArr[highwaymenArr.index(hwm)]) +"\n"
     await ctx.send(response)
+@bot.command(name='cum', help= "Displays something cum related.")
+async def cum(ctx, *args):
+    randCumEvent = random.choice(1, 8)
+    if randCumEvent is 1:
+        response = "If it don't cum soon my crops will die."
+    elif randCumEvent is 2:
+        response = "Perhaps I may be cum"
+    elif  randCumEvent is 3:
+        response = "red"
+    elif randCumEvent is 4:
+        response = "This guy's a cummer! :happyKris:"
+    elif randCumEvent is 5:
+        response = "This guy's a coomer. :cummingWillie:"
+    elif randCumEvent is 6:
+        response = "This guy's a cummer! :happyJohnny:"
+    elif randCumEvent is 7:
+        response = "This guy's a coomer. :cummingWaylon:"
+    elif randCumEvent is 8:
+        response = "He tells me that he's cummin' but the clouds are cummin' too."
+    elif
 
+    await ctx.send(response)
 @tasks.loop(hours=24)
 async def called_once_a_day():
     message_channel = bot.get_channel(target_channel_id)
